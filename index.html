@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CVMILO PORRAS — Official EPK</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --red: #E8192C;
+  --red-dim: #8B0F1A;
+  --black: #070709;
+  --surface: #0D0D12;
+  --surface2: #121219;
+  --border: #1E1E2A;
+  --text: #E8E8F0;
+  --text-dim: #7070A0;
+  --mono: 'Share Tech Mono', monospace;
+  --head: 'Orbitron', monospace;
+  --body: 'Rajdhani', sans-serif;
+  --grid-size: 40px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+/* GRID BG */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(232,25,44,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,25,44,0.03) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* SCANLINES */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.wrap { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+/* NAV */
+nav {
+  position: sticky;
+  top: 0;
+  background: rgba(7,7,9,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+  padding: 12px 20px;
+}
+.nav-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.nav-logo { font-family: var(--head); font-size: 12px; color: var(--red); letter-spacing: 0.15em; }
+.nav-links { display: flex; gap: 20px; }
+.nav-links a { font-family: var(--mono); font-size: 11px; color: var(--text-dim); text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s; }
+.nav-links a:hover { color: var(--red); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 20px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--red);
+  letter-spacing: 0.25em;
+  margin-bottom: 16px;
+  animation: fadeUp 0.8s ease both;
+}
+.hero-name {
+  font-family: var(--head);
+  font-size: clamp(42px, 10vw, 90px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  animation: fadeUp 0.8s 0.1s ease both;
+}
+.hero-name span { color: var(--red); }
+.hero-genre {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text-dim);
+  letter-spacing: 0.2em;
+  margin-bottom: 32px;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+.hero-bio {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #AAAAC0;
+  max-width: 600px;
+  margin-bottom: 40px;
+  animation: fadeUp 0.8s 0.3s ease both;
+  font-weight: 500;
+}
+.hero-cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.4s ease both;
+}
+.btn-primary {
+  background: var(--red);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: #ff1f35; }
+.btn-outline {
+  background: transparent;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  padding: 11px 24px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s;
+}
+.btn-outline:hover { border-color: var(--red); color: var(--red); }
+
+/* DEXTER BADGE */
+.dexter-badge {
+  margin-top: 48px;
+  border: 1px solid var(--red-dim);
+  background: rgba(232,25,44,0.04);
+  padding: 20px 24px;
+  max-width: 560px;
+  position: relative;
+  animation: fadeUp 0.8s 0.5s ease both;
+}
+.dexter-badge::before {
+  content: '// CLASSIFIED — FANDOM DESIGNATION';
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  background: var(--black);
+  padding: 0 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--red);
+  letter-spacing: 0.15em;
+}
+.dexter-badge p {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.8;
+}
+.dexter-badge p strong { color: var(--red); }
+
+/* HERO DECO */
+.hero-deco {
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 420px;
+  height: 420px;
+  border: 1px solid rgba(232,25,44,0.08);
+  border-radius: 50%;
+  animation: spin 30s linear infinite;
+  pointer-events: none;
+}
+.hero-deco::before {
+  content: '';
+  position: absolute;
+  inset: 30px;
+  border: 1px solid rgba(232,25,44,0.05);
+  border-radius: 50%;
+}
+.hero-deco::after {
+  content: '';
+  position: absolute;
+  inset: 60px;
+  border: 1px dashed rgba(232,25,44,0.06);
+  border-radius: 50%;
+}
+
+/* SECTIONS */
+section { padding: 80px 0; border-top: 1px solid var(--border); }
+.section-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--red);
+  letter-spacing: 0.25em;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--head);
+  font-size: clamp(24px, 5vw, 40px);
+  font-weight: 700;
+  margin-bottom: 40px;
+  line-height: 1.1;
+}
+
+/* STATS */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; background: var(--border); margin-bottom: 48px; }
+.stat {
+  background: var(--surface);
+  padding: 24px 20px;
+  text-align: center;
+}
+.stat-num {
+  font-family: var(--head);
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label { font-family: var(--mono); font-size: 10px; color: var(--text-dim); letter-spacing: 0.15em; }
+
+/* ABOUT */
+.about-text {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #AAAAC0;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.about-text strong { color: var(--text); }
+
+/* VENUES */
+.venues-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
+.venue-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: border-color 0.2s;
+}
+.venue-item:hover { border-color: var(--red-dim); }
+.venue-dot { width: 6px; height: 6px; background: var(--red); flex-shrink: 0; }
+.venue-name { font-family: var(--mono); font-size: 12px; color: var(--text-dim); letter-spacing: 0.05em; }
+.venue-city { font-size: 11px; color: #404060; margin-left: auto; font-family: var(--mono); }
+
+/* SETS */
+.sets-list { display: flex; flex-direction: column; gap: 12px; }
+.set-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.set-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--red);
+  transform: scaleY(0);
+  transition: transform 0.2s;
+}
+.set-card:hover { border-color: var(--red-dim); background: var(--surface2); }
+.set-card:hover::before { transform: scaleY(1); }
+.set-icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(232,25,44,0.08);
+  border: 1px solid var(--red-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+.set-info { flex: 1; }
+.set-title { font-family: var(--mono); font-size: 13px; color: var(--text); margin-bottom: 3px; }
+.set-meta { font-size: 12px; color: var(--text-dim); }
+.set-arrow { font-family: var(--mono); font-size: 18px; color: var(--red-dim); transition: transform 0.2s; }
+.set-card:hover .set-arrow { transform: translateX(4px); }
+
+/* RELEASES */
+.releases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.release-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 20px;
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s;
+  position: relative;
+}
+.release-card:hover { border-color: var(--red-dim); }
+.release-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--red);
+  letter-spacing: 0.15em;
+  margin-bottom: 10px;
+}
+.release-title { font-family: var(--head); font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.release-feat { font-size: 13px; color: var(--text-dim); margin-bottom: 12px; }
+.release-link {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--red);
+  letter-spacing: 0.1em;
+}
+
+/* COMING SOON */
+.coming-soon {
+  border: 1px dashed var(--red-dim);
+  background: rgba(232,25,44,0.03);
+  padding: 40px;
+  text-align: center;
+  position: relative;
+}
+.coming-soon-label {
+  font-family: var(--head);
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: var(--red);
+  margin-bottom: 10px;
+}
+.coming-soon-date {
+  font-family: var(--mono);
+  font-size: 28px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.coming-soon-sub { font-size: 14px; color: var(--text-dim); font-family: var(--mono); }
+.blink { animation: blink 1.2s step-end infinite; }
+
+/* DEXTER SECTION */
+.dexter-section {
+  background: var(--surface);
+  border: 1px solid var(--red-dim);
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+.dexter-section::before {
+  content: 'LAB_ACCESS_GRANTED';
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(232,25,44,0.3);
+  letter-spacing: 0.15em;
+}
+.dexter-section::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  right: -80px;
+  width: 240px;
+  height: 240px;
+  border: 1px solid rgba(232,25,44,0.06);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.dexter-quote {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--red);
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+}
+.dexter-text {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #AAAAC0;
+  font-weight: 500;
+}
+.dexter-text strong { color: var(--text); }
+.lab-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.lab-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 5px 12px;
+  border: 1px solid var(--red-dim);
+  color: var(--red);
+  background: rgba(232,25,44,0.05);
+  letter-spacing: 0.1em;
+}
+
+/* RIDER */
+.rider-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) { .rider-grid { grid-template-columns: 1fr; } }
+.rider-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 24px;
+}
+.rider-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--red);
+  letter-spacing: 0.2em;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.rider-item {
+  font-size: 13px;
+  color: #8080A0;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(30,30,42,0.6);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-family: var(--mono);
+}
+.rider-item::before { content: '+'; color: var(--red); flex-shrink: 0; }
+
+/* CONTACT */
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 40px; }
+.contact-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 20px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.contact-card:hover { border-color: var(--red-dim); }
+.contact-label { font-family: var(--mono); font-size: 10px; color: var(--text-dim); letter-spacing: 0.2em; margin-bottom: 6px; }
+.contact-value { font-family: var(--mono); font-size: 13px; color: var(--red); }
+
+.socials { display: flex; gap: 10px; flex-wrap: wrap; }
+.social-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding: 10px 18px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.social-btn:hover { border-color: var(--red); color: var(--red); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 20px;
+  text-align: center;
+}
+.footer-logo { font-family: var(--head); font-size: 20px; font-weight: 900; color: var(--red); margin-bottom: 8px; letter-spacing: 0.1em; }
+.footer-sub { font-family: var(--mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.15em; }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin { to { transform: translateY(-50%) rotate(360deg); } }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .hero-deco { display: none; }
+  section { padding: 50px 0; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">CVMILO PORRAS // EPK 2025</div>
+    <div class="nav-links">
+      <a href="#about">BIO</a>
+      <a href="#lab">THE LAB</a>
+      <a href="#sets">SETS</a>
+      <a href="#releases">RELEASES</a>
+      <a href="#booking">BOOKING</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-label">▶ OFFICIAL PRESS KIT — 2025</div>
+    <h1 class="hero-name">CVMILO<br/><span>PORRAS</span></h1>
+    <div class="hero-genre">TECH HOUSE · HOUSE · MINIMAL TECH · INDIE DANCE</div>
+    <p class="hero-bio">
+      DJ & producer from Colombia, based in <strong>New York City</strong>. Signed to 305Made Miami & Xima Records.
+      Blending a European flow with Latin flavor — built in the underground, raised by the dance floor.
+    </p>
+    <div class="hero-cta">
+      <a href="#booking" class="btn-primary">BOOKING INQUIRY</a>
+      <a href="https://linktr.ee/dj_camiloporras.nyc" target="_blank" class="btn-outline">ALL LINKS ↗</a>
+    </div>
+
+    <div class="dexter-badge">
+      <p>
+        <strong>// FANDOM DESIGNATION:</strong> "The Modern Dexter" —<br/>
+        A producer who disappeared into his own lab and came back with sounds too deep to explain.
+        No one really knows what happens in there. The music just hits different.
+      </p>
+    </div>
+  </div>
+  <div class="hero-deco"></div>
+</section>
+
+<!-- STATS -->
+<div class="wrap">
+  <div class="stats-grid">
+    <div class="stat"><div class="stat-num">2018</div><div class="stat-label">DJ SINCE</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">LABELS SIGNED</div></div>
+    <div class="stat"><div class="stat-num">9+</div><div class="stat-label">VENUES NYC & US</div></div>
+    <div class="stat"><div class="stat-num">NYC</div><div class="stat-label">HOME BASE</div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-tag">// 001 — BIOGRAPHY</div>
+    <h2 class="section-title">BUILT IN<br/>THE UNDERGROUND</h2>
+    <p class="about-text">
+      Camilo Porras began his career in <strong>New York City in 2021</strong>, cutting his teeth at after-parties and clubs across Brooklyn.
+      What started in the underground quickly expanded — performances in <strong>Miami, Washington DC</strong>, and across the New York scene
+      earned him recognition that labels couldn't ignore.
+    </p>
+    <p class="about-text">
+      He is currently signed to <strong>4 labels</strong> — <strong>305Made Miami, Xima Records, Dub Miami</strong> and <strong>Nightshift Records</strong> —
+      a testament to a production style that stands apart and continues to attract industry recognition worldwide. His sound combines a European flow with Latin flavor,
+      a hybrid that has allowed him to share the stage with artists like <strong>Harvy Valencia, Fronter, Kofla,
+      Jesse Bravo, Ferra Black, Alberto Dimeo, Gustavo Dominguez,</strong> and Amal Nemer.
+    </p>
+
+    <h3 style="font-family:var(--mono);font-size:12px;color:var(--red);letter-spacing:0.2em;margin:40px 0 20px;">// VENUES PLAYED</h3>
+    <div class="venues-grid">
+      <div class="venue-item"><div class="venue-dot"></div><span class="venue-name">SUPERIOR INGREDIENTS</span><span class="venue-city">NY</span></div>
+      <div class="venue-item"><div class="venue-dot"></div><span class="venue-name">SUMMER CLUB</span><span class="venue-city">NY</span></div>
+      <div class="venue-item"><div class="venue-dot"></div><span class="venue-name">LISTEN BROOKLYN</span><span class="venue-city">NY</span></div>
+      <div class="venue-item"><div class="venue-dot"></div><span class="venue-name">BOMBA</span><span class="venue-city">NY</span></div>
+      <div class="venue-item"><div class="venue-dot"></div><span class="venue-name">PUBLIC HOTEL</span><span class="venue-city">NY</span></div>
+      <div class="venue-item"><div class="venue-dot"></div><span class="venue-name">JOLENE SOUNDROOM BK</span><span class="venue-city">NY</span></div>
+      <div class="venue-item"><div class="venue-dot"></div><span class="venue-name">THE FACTORY NYC</span><span class="venue-city">NY</span></div>
+      <div class="venue-item"><div class="venue-dot"></div><span class="venue-name">MOXY SOUTH BEACH</span><span class="venue-city">MIA</span></div>
+      <div class="venue-item"><div class="venue-dot"></div><span class="venue-name">¥€$ MIAMI</span><span class="venue-city">MIA</span></div>
+      <div class="venue-item"><div class="venue-dot"></div><span class="venue-name">PISCOTECA CHARLOTTE</span><span class="venue-city">NC</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEXTER'S LAB -->
+<section id="lab">
+  <div class="wrap">
+    <div class="section-tag">// 002 — FANDOM FILE</div>
+    <h2 class="section-title">THE LAB</h2>
+    <div class="dexter-section">
+      <div class="dexter-quote">[ INCOMING TRANSMISSION FROM THE UNDERGROUND ]</div>
+      <p class="dexter-text">
+        His fans call him <strong>"The Modern Dexter"</strong> — and not without reason. Like the boy genius who retreated into a secret lab
+        to build things no one else understood, Camilo Porras disappears into his studio and emerges with productions
+        that feel like they were engineered in another dimension.
+      </p>
+      <br/>
+      <p class="dexter-text">
+        The basslines hit at frequencies that bypass logic and go straight to the body. The layering is obsessive —
+        every element placed with the precision of someone who considers music a <strong>scientific experiment</strong>.
+        His crowd doesn't just dance. They get absorbed. They forget where they are.
+        That's what happens when the lab opens its doors.
+      </p>
+      <br/>
+      <p class="dexter-text">
+        <strong>No flashy gimmicks. No empty hype.</strong> Just deep, relentless sound architecture from a man
+        who treats the DJ booth like a control room — and the dance floor like proof of concept.
+      </p>
+      <div class="lab-tags">
+        <span class="lab-tag">DEEP BASSLINES</span>
+        <span class="lab-tag">SOUND ARCHITECTURE</span>
+        <span class="lab-tag">EUROPEAN FLOW</span>
+        <span class="lab-tag">LATIN FLAVOR</span>
+        <span class="lab-tag">UNDERGROUND ROOTS</span>
+        <span class="lab-tag">PRECISION MIXING</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SETS -->
+<section id="sets">
+  <div class="wrap">
+    <div class="section-tag">// 003 — LIVE SESSIONS</div>
+    <h2 class="section-title">SETS &<br/>RECORDINGS</h2>
+    <div class="sets-list">
+      <a href="https://soundcloud.com/camiloporras_music/hot-sauce-vol-01-mixed-by-1" target="_blank" class="set-card">
+        <div class="set-icon">🔥</div>
+        <div class="set-info">
+          <div class="set-title">HOT SAUCE VOL. 01</div>
+          <div class="set-meta">Mixed Session · House & Underground Rhythms · 1:35:36</div>
+        </div>
+        <div class="set-arrow">→</div>
+      </a>
+      <a href="https://soundcloud.com/camiloporras_music/camilo-porras-at-the-factory" target="_blank" class="set-card">
+        <div class="set-icon">🏭</div>
+        <div class="set-info">
+          <div class="set-title">CVMILO PORRAS AT THE FACTORY NYC</div>
+          <div class="set-meta">Warm Up Set · @thefactorynyc · New York</div>
+        </div>
+        <div class="set-arrow">→</div>
+      </a>
+      <a href="https://soundcloud.com/camiloporras_music/tussi_aventuras_aftermirage" target="_blank" class="set-card">
+        <div class="set-icon">🌅</div>
+        <div class="set-info">
+          <div class="set-title">AFTER MIRAGE — LIVE SESSION</div>
+          <div class="set-meta">Closing Set · AfterMirage 2023 · 1:49:37</div>
+        </div>
+        <div class="set-arrow">→</div>
+      </a>
+      <a href="https://on.soundcloud.com/4hQcPz2mRrmaTwvw8" target="_blank" class="set-card">
+        <div class="set-icon">🎛️</div>
+        <div class="set-info">
+          <div class="set-title">WARM UP FOR FERRA BLACK</div>
+          <div class="set-meta">@listenbrooklyn · Brooklyn, NY · 2:17:22</div>
+        </div>
+        <div class="set-arrow">→</div>
+      </a>
+      <a href="https://on.soundcloud.com/gWpehB8pM9POsuUeXc" target="_blank" class="set-card">
+        <div class="set-icon">🏨</div>
+        <div class="set-info">
+          <div class="set-title">PUBLIC HOTEL — SPRING 2025</div>
+          <div class="set-meta">Live Session · Back to Basics · New York</div>
+        </div>
+        <div class="set-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- RELEASES -->
+<section id="releases">
+  <div class="wrap">
+    <div class="section-tag">// 004 — DISCOGRAPHY</div>
+    <h2 class="section-title">RELEASES</h2>
+
+    <!-- COMING SOON -->
+    <div class="coming-soon" style="margin-bottom: 24px;">
+      <div class="coming-soon-label">▶ DOUBLE RELEASE</div>
+      <div class="coming-soon-date">JUNE 12, 2025</div>
+      <div class="coming-soon-sub">XIMA RECORDS · DUB MIAMI · ONE DATE<br/><br/><span class="blink">■</span> PRE-ORDER LINKS COMING SOON <span class="blink">■</span></div>
+    </div>
+
+    <div class="releases-grid">
+      <a href="https://lynkify.in/song/hit-the-floor-edit/pVq0tT3X" target="_blank" class="release-card">
+        <div class="release-tag">SINGLE</div>
+        <div class="release-title">HIT THE FLOOR</div>
+        <div class="release-feat">Edit — Camilo Porras</div>
+        <div class="release-link">STREAM ↗</div>
+      </a>
+      <a href="https://lynkify.in/song/fight-me-dub-mix/aqobGU9l" target="_blank" class="release-card">
+        <div class="release-tag">SINGLE</div>
+        <div class="release-title">FIGHT ME</div>
+        <div class="release-feat">Dub Mix — Camilo Porras</div>
+        <div class="release-link">STREAM ↗</div>
+      </a>
+      <a href="https://lynkify.in/song/in-the-club-radio-edit/cAbm5Qmf" target="_blank" class="release-card">
+        <div class="release-tag">SINGLE</div>
+        <div class="release-title">IN THE CLUB</div>
+        <div class="release-feat">Radio Edit — Camilo Porras</div>
+        <div class="release-link">STREAM ↗</div>
+      </a>
+      <a href="https://lynkify.in/album/funk-phenom/M7HzUtnE" target="_blank" class="release-card">
+        <div class="release-tag">COLLAB</div>
+        <div class="release-title">FUNK PHENOM</div>
+        <div class="release-feat">Torre & Lords, Camilo Porras</div>
+        <div class="release-link">STREAM ↗</div>
+      </a>
+      <a href="https://lynkify.in/album/presente/35FQFkPk" target="_blank" class="release-card">
+        <div class="release-tag">COLLAB</div>
+        <div class="release-title">PRESENTE</div>
+        <div class="release-feat">Kazzan & Camilo Porras</div>
+        <div class="release-link">STREAM ↗</div>
+      </a>
+      <a href="https://open.spotify.com/track/4LERautXrWkenALUtFmfPO" target="_blank" class="release-card">
+        <div class="release-tag">SINGLE</div>
+        <div class="release-title">PAY ATTENTION</div>
+        <div class="release-feat">Camilo Porras — Spotify</div>
+        <div class="release-link">STREAM ↗</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TECH RIDER -->
+<section>
+  <div class="wrap">
+    <div class="section-tag">// 005 — TECHNICAL</div>
+    <h2 class="section-title">RIDER</h2>
+    <div class="rider-grid">
+      <div class="rider-block">
+        <div class="rider-title">// TECH RIDER</div>
+        <div class="rider-item">4 CDJ's Pioneer 3000, 3000X or 2000NXS2</div>
+        <div class="rider-item">1 Mixer Pioneer DJM — V9, V10 or A9</div>
+        <div class="rider-item">1 RMX 1000 Pioneer</div>
+        <div class="rider-item">1 Network Switch System (LAN)</div>
+        <div class="rider-item">2x Booth monitors at ear level</div>
+        <div class="rider-item">Min. 3 power sockets with US adapters</div>
+        <div class="rider-item">DJ must be clearly visible to audience</div>
+      </div>
+      <div class="rider-block">
+        <div class="rider-title">// HOSPITALITY</div>
+        <div class="rider-item">Accommodation: Grand Hyatt, Sheraton or West Inn</div>
+        <div class="rider-item">Travel coverage for 2 people (Business Class)</div>
+        <div class="rider-item">Late check-out + breakfast/lunch included</div>
+        <div class="rider-item">Transportation: Range Rover or large SUV</div>
+        <div class="rider-item">Green room: drinks, food, fruit & sandwiches</div>
+        <div class="rider-item">Guest list: 10 invitations</div>
+        <div class="rider-item">2 bottles (vodka, tequila or whiskey)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="wrap">
+    <div class="section-tag">// 006 — CONTACT</div>
+    <h2 class="section-title">BOOKING &<br/>INQUIRIES</h2>
+    <div class="contact-grid">
+      <a href="mailto:djcamiloporras.priv@gmail.com" class="contact-card">
+        <div class="contact-label">EMAIL</div>
+        <div class="contact-value">djcamiloporras.priv<br/>@gmail.com</div>
+      </a>
+      <a href="tel:+19173917037" class="contact-card">
+        <div class="contact-label">PHONE</div>
+        <div class="contact-value">+1 (917) 391 7037</div>
+      </a>
+      <a href="https://linktr.ee/dj_camiloporras.nyc" target="_blank" class="contact-card">
+        <div class="contact-label">ALL LINKS</div>
+        <div class="contact-value">linktr.ee/<br/>dj_camiloporras.nyc</div>
+      </a>
+    </div>
+
+    <div class="socials">
+      <a href="https://www.instagram.com/cvmiloporras.music" target="_blank" class="social-btn">INSTAGRAM ↗</a>
+      <a href="https://spotify.link/GDmTiQDIQAb" target="_blank" class="social-btn">SPOTIFY ↗</a>
+      <a href="https://on.soundcloud.com/fPJnhMCaCkuLnAG39" target="_blank" class="social-btn">SOUNDCLOUD ↗</a>
+      <a href="https://music.apple.com/us/artist/dj-camilo-porras/1595965744" target="_blank" class="social-btn">APPLE MUSIC ↗</a>
+      <a href="https://vyntfreqncy.bandcamp.com/album/edits-vol-1" target="_blank" class="social-btn">BANDCAMP ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-logo">CVMILO PORRAS</div>
+    <div class="footer-sub">NYC · COLOMBIA · WORLDWIDE — EPK 2025</div>
+  </div>
+</footer>
+
+</body>
+</html>
