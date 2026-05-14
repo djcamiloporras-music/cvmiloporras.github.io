@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CVMILO PORRAS — Links</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600&display=swap" rel="stylesheet"/>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* VIDEO BACKGROUND */
+.video-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.video-bg iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.78vh;
+  height: 100vh;
+  min-width: 100vw;
+  min-height: 56.25vw;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.video-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(7,7,9,0.75) 0%,
+    rgba(7,7,9,0.60) 40%,
+    rgba(7,7,9,0.80) 100%
+  );
+  z-index: 1;
+}
+
+/* SCANLINES */
+.video-overlay::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px
+  );
+  pointer-events: none;
+}
+
+/* CONTENT */
+.content {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px 40px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* PROFILE */
+.profile { text-align: center; margin-bottom: 32px; }
+.avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: 2px solid #E8192C;
+  margin: 0 auto 16px;
+  background: #0D0D12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(232,25,44,0.3);
+}
+.avatar-initials {
+  font-family: 'Orbitron', monospace;
+  font-size: 24px;
+  font-weight: 900;
+  color: #E8192C;
+}
+.profile-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 20px;
+  font-weight: 900;
+  color: #F0F0FF;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+  text-shadow: 0 0 20px rgba(232,25,44,0.4);
+}
+.profile-bio {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.1em;
+  line-height: 1.7;
+}
+.profile-bio span { color: #E8192C; }
+
+/* SECTION LABEL */
+.section-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: rgba(232,25,44,0.7);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin: 20px 0 10px;
+  width: 100%;
+  text-align: left;
+  padding-left: 4px;
+}
+
+/* LINKS */
+.links { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+
+.link-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  background: rgba(13,13,18,0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(232,25,44,0.2);
+  border-radius: 4px;
+  text-decoration: none;
+  color: #E8E8F0;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.link-btn::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: #E8192C;
+  transform: scaleY(0);
+  transition: transform 0.2s;
+}
+.link-btn:hover {
+  background: rgba(232,25,44,0.08);
+  border-color: rgba(232,25,44,0.5);
+  transform: translateX(4px);
+}
+.link-btn:hover::before { transform: scaleY(1); }
+
+.link-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(232,25,44,0.1);
+  border: 1px solid rgba(232,25,44,0.2);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.link-text { flex: 1; }
+.link-title {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  color: #E8E8F0;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+.link-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+}
+.link-arrow {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 14px;
+  color: rgba(232,25,44,0.5);
+}
+
+/* FEATURED VIDEO */
+.featured-video {
+  width: 100%;
+  margin-top: 8px;
+  border: 1px solid rgba(232,25,44,0.3);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.featured-label {
+  background: rgba(232,25,44,0.9);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: #fff;
+  padding: 5px 12px;
+  text-align: center;
+}
+.video-wrap {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  background: #0D0D12;
+}
+.video-wrap iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 40px;
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Orbitron', monospace;
+  font-size: 11px;
+  color: rgba(232,25,44,0.5);
+  letter-spacing: 0.2em;
+  margin-bottom: 4px;
+}
+.footer-sub {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.1em;
+}
+</style>
+</head>
+<body>
+
+<!-- VIDEO BACKGROUND -->
+<div class="video-bg">
+  <iframe
+    src="https://www.youtube.com/embed/UfZInpUGkns?autoplay=1&mute=1&loop=1&playlist=UfZInpUGkns&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&start=30"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
+</div>
+<div class="video-overlay"></div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <div class="profile">
+    <div class="avatar">
+      <div class="avatar-initials">CP</div>
+    </div>
+    <div class="profile-name">CVMILO PORRAS</div>
+    <div class="profile-bio">
+      DJ & Producer · <span>New York City</span><br/>
+      Tech House · House · Minimal Tech · Indie Dance<br/>
+      <span>305Made Miami · Xima Records · Dub Miami · Nightshift Records</span>
+    </div>
+  </div>
+
+  <div class="links">
+
+    <!-- MUSIC -->
+    <div class="section-label">// MUSIC</div>
+
+    <a href="https://spotify.link/GDmTiQDIQAb" target="_blank" class="link-btn">
+      <div class="link-icon">🎧</div>
+      <div class="link-text">
+        <div class="link-title">SPOTIFY</div>
+        <div class="link-sub">Stream all releases</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://on.soundcloud.com/fPJnhMCaCkuLnAG39" target="_blank" class="link-btn">
+      <div class="link-icon">☁️</div>
+      <div class="link-text">
+        <div class="link-title">SOUNDCLOUD</div>
+        <div class="link-sub">Mixes, sets & releases</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://music.apple.com/us/artist/dj-camilo-porras/1595965744" target="_blank" class="link-btn">
+      <div class="link-icon">🎵</div>
+      <div class="link-text">
+        <div class="link-title">APPLE MUSIC</div>
+        <div class="link-sub">Listen on Apple Music</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://vyntfreqncy.bandcamp.com/album/edits-vol-1" target="_blank" class="link-btn">
+      <div class="link-icon">🎼</div>
+      <div class="link-text">
+        <div class="link-title">BANDCAMP</div>
+        <div class="link-sub">Edits Vol.1 — Vynt Freqncy</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <!-- LATEST RELEASES -->
+    <div class="section-label">// LATEST RELEASES</div>
+
+    <a href="https://lynkify.in/song/hit-the-floor-edit/pVq0tT3X" target="_blank" class="link-btn">
+      <div class="link-icon">🔊</div>
+      <div class="link-text">
+        <div class="link-title">HIT THE FLOOR — EDIT</div>
+        <div class="link-sub">All platforms</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://lynkify.in/song/fight-me-dub-mix/aqobGU9l" target="_blank" class="link-btn">
+      <div class="link-icon">🔊</div>
+      <div class="link-text">
+        <div class="link-title">FIGHT ME — DUB MIX</div>
+        <div class="link-sub">All platforms</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://lynkify.in/song/in-the-club-radio-edit/cAbm5Qmf" target="_blank" class="link-btn">
+      <div class="link-icon">🔊</div>
+      <div class="link-text">
+        <div class="link-title">IN THE CLUB — RADIO EDIT</div>
+        <div class="link-sub">All platforms</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://lynkify.in/album/funk-phenom/M7HzUtnE" target="_blank" class="link-btn">
+      <div class="link-icon">🔊</div>
+      <div class="link-text">
+        <div class="link-title">FUNK PHENOM — TORRE & LORDS</div>
+        <div class="link-sub">feat. Camilo Porras</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <!-- DOUBLE RELEASE -->
+    <div class="link-btn" style="border-color:rgba(232,25,44,0.5);background:rgba(232,25,44,0.06);cursor:default;">
+      <div class="link-icon">⏳</div>
+      <div class="link-text">
+        <div class="link-title" style="color:#E8192C;">DOUBLE RELEASE — JUNE 12</div>
+        <div class="link-sub">Xima Records · Dub Miami · Pre-order coming soon</div>
+      </div>
+    </div>
+
+    <!-- FEATURED VIDEO -->
+    <div class="section-label">// FEATURED SET</div>
+    <div class="featured-video">
+      <div class="featured-label">▶ DEEP TECH & TECH HOUSE — BROOKLYN SET</div>
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/UfZInpUGkns"
+          title="Camilo Porras | Deep Tech & Tech House Brooklyn Set"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <!-- SOCIAL -->
+    <div class="section-label">// SOCIAL & BOOKING</div>
+
+    <a href="https://www.instagram.com/cvmiloporras.music" target="_blank" class="link-btn">
+      <div class="link-icon">📸</div>
+      <div class="link-text">
+        <div class="link-title">INSTAGRAM</div>
+        <div class="link-sub">@cvmiloporras.music</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="mailto:djcamiloporras.priv@gmail.com" class="link-btn">
+      <div class="link-icon">📩</div>
+      <div class="link-text">
+        <div class="link-title">BOOKING</div>
+        <div class="link-sub">djcamiloporras.priv@gmail.com</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://djcamiloporras-music.github.io/cvmiloporras.github.io" target="_blank" class="link-btn">
+      <div class="link-icon">📋</div>
+      <div class="link-text">
+        <div class="link-title">OFFICIAL EPK</div>
+        <div class="link-sub">Press Kit & Rider</div>
+      </div>
+      <div class="link-arrow">→</div>
+    </a>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-logo">CVMILO PORRAS</div>
+    <div class="footer-sub">NYC · 2025</div>
+  </div>
+
+</div>
+</body>
+</html>
